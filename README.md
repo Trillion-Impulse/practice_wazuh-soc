@@ -122,3 +122,20 @@
 ### VM 설정
 - VM 실행 중에는 일부 설정 UI를 사용할 수 없는 경우 존재
     - VM 종료 후 설정
+
+### Ubuntu profile configuration
+- Your name
+    - 사용자 실명 또는 별칭
+    - Ubuntu 내부에서는 주로 설명용으로 사용
+    - 터미널 작업이나 서버 운영에는 거의 영향 없음
+- Your server's name
+    - Hostname이라고 부름
+    - 서버의 이름
+    - 로그인 후 터미널에 `username@hostname:~$` 이렇게 나옴
+    - 네트워크에서도 사용됨
+- Pick a username
+    - 실제 로그인 계정
+    - SSH 접속 시에도 사용
+    - sudo 사용 시에도 사용
+    - ID의 역할
+
