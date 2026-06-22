@@ -87,8 +87,8 @@
 
 ## 7. 진행 현황
 - [x] 문서 스켈레톤 작성
-- [ ] VirtualBox 설치
-- [ ] Attack VM 구축
+- [x] VirtualBox 설치
+- [x] Attack VM 구축
 - [ ] Target VM 구축
 - [ ] Wazuh VM 구축
 - [ ] SSH 구성
