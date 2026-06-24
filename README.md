@@ -181,3 +181,31 @@
 - `ip r`: 라우팅 테이블 확인
 - `ip neigh`: ARP 테이블 확인 
 - `ip addr show`: IP 정보 상세 조회
+
+### systemctl
+- systemd를 제어하는 명령어
+- systemd는 Linux의 시스템 관리자
+    - 컴퓨터가 부팅되면 systemd가 가장 먼저 여러 작업을 수행
+        - 서비스 시작
+        - 네트워크 활성화
+        - 로그 관리
+        - 사용자 로그인 준비
+        - 서비스 상태 감시
+- systemctl은 systemd에게 명령을 내리는 도구
+- 서비스(Service)란?
+    - Linux에서 서비스는 백그라운드에서 계속 동작하는 프로그램
+    - SSH 서버, 웹 서버, 데이터베이스 서버, Docker 등
+- systemctl은 이런 서비스들을 관리
+- 기본 구조
+    ```
+    systemctl [서브커맨드] [대상]
+    ```
+    - ex: `systemctl status ssh`
+- 서브커맨드
+    - status: 상태 확인
+    - start: 서비스 시작
+    - stop: 서비스 중지
+    - restart: 재시작
+    - reload: 설정만 재적용하기
+    - is-active: 실행 중인지 확인
+    - is-enabled: 자동 시작 여부 확인
