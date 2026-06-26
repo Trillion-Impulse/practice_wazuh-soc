@@ -157,6 +157,16 @@
     - 취약점 관리
     - 파일 무결성
 - SOC 분석가가 공격 흔적을 발견할 수 있도록 데이터를 수집하고 경고를 발생시키는 플랫폼
+- Agent
+    - 로그를 수집하는 프로그램
+    - Target 서버 안에 설치됨
+    - ex: auth.log를 읽어서 로그인 실패 발생 등의 메세지를 Manager에게 보냄
+- Manager
+    - 로그를 분석하는 프로그램
+    - ex: Failed password 라는 로그를 받으면, 규칙(Rule)과 비교해서 SSH 로그인 실패 라고 판단
+- Dashboard
+    - 웹 브라우저에서 보는 화면
+    - ex: Chrome에서 `https://Wazuh-IP`로 접속하면 Alert, Events, Agent, Inventory 등을 볼 수 있음
 
 ## 10. 명령어
 
