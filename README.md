@@ -184,6 +184,26 @@
 ### whoami
 - 현재 로그인한 사용자의 이름을 출력하는 명령어
 
+### hostnamectl
+- 컴퓨터의 이름(Hostname)을 확인하고 변경하는 명령어
+- Hostname(호스트 이름)은 컴퓨터를 구분하기 위한 이름
+- 컴퓨터 이름뿐 아니라 시스템 정보도 함께 보여주고, 이름도 변경할 수 있음
+- 기본 구조: `hostnamectl [옵션] [서브커맨드]`
+- 시스템 정보 보기: `hostnamectl`
+- 옵션
+    - `--static`: 고정(static) 호스트 이름을 출력하거나 설정
+        - Static Hostname이란?
+            - 컴퓨터에 저장되어 있는 기본 이름
+    - `--transient`: 일시적인 호스트 이름을 출력하거나 설정
+        - Transient Hostname이란?
+            - 네트워크에서 자동으로 받은 임시 이름
+    - `--pretty`: 사람이 보기 좋은 이름을 출력하거나 설정
+    - `--version`: 버전 확인
+- 서브 커맨드
+    - `status`: 시스템 정보를 출력
+    - `set-hostname`: 컴퓨터 이름 변경
+        - `sudo hostnamectl set-hostname [변경할 이름]`
+
 ### pwd
 - Print Working Directory
 - 현재 내가 있는 폴더(디렉터리)의 위치를 출력하는 명령어
