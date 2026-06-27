@@ -101,6 +101,20 @@
 
 ## 9. 트러블 슈팅
 
+### 이슈: Host-Only 인터페이스에 IPv4가 자동 할당 되지 않음
+- 해결 과정
+    - Netplan 설정 확인
+        - `sudo cat /etc/netplan/*.yaml` 확인
+        - enp0s8이 DHCP 관리대상에 추가되어 있지 않는 것을 발견
+    - enp0s8: dhcp4: true 추가하는 방법으로 해결 시도
+    - 재부팅 후 동일한 문제 발견
+    - `ls -l /etc/netplan` 확인
+        - 50-cloud-init.yaml 파일 발견
+        - 부팅 시 cloud-init에 의해 다시 덮어쓰기 되는 것으로 추정
+    - cloud-init을 끄기 | 기존의 cloud-init 파일 제거 | 새로운 netplan 파일 생성으로 해결 시도
+    - 부팅 중 멈추는 문제 발생
+    - vm 삭제 후 새로 생성 | Ubuntu 설치 전 미리 네트워크 어댑터 NAT, Host-Only 적용 설정으로 해결
+
 ## 10. 관련 지식
 
 ### VM 생성
