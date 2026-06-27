@@ -184,6 +184,65 @@
     - 웹 브라우저에서 보는 화면
     - ex: Chrome에서 `https://Wazuh-IP`로 접속하면 Alert, Events, Agent, Inventory 등을 볼 수 있음
 
+### 부팅 시 네트워크의 동작
+- 순서
+    ```
+    1. 부팅 시작
+    2. cloud-init 실행 (초기 설정 단계)
+    3. netplan 설정 읽음
+    4. systemd-networkd 또는 NetworkManager 실행
+    5. IP 할당 (DHCP or static)
+    6. 네트워크 활성화
+    ```
+- cloud-init 이란?
+    - 처음 VM 켤 때 자동 설정해주는 초기화 엔진
+    - 하는 일
+        - hostname 설정
+        - SSH key 생성
+        - 사용자 생성
+        - 네트워크 설정 생성
+        - package 설치
+    - 클라우드 환경용 자동 초기화 도구
+- netplan 이란?
+    - Ubuntu에서 네트워크 설정을 최종적으로 적용하는 도구
+    - 역할
+        - netplan은 실제로 네트워크를 직접 만들지 않음
+            ```
+            YAML 설정 읽기
+                ↓
+            systemd-networkd 또는 NetworkManager에게 전달
+                ↓
+            실제 네트워크 구성
+            ```
+    - 설정 파일 위치
+        - `/etc/netplan/`
+- cloud-init과 netplan의 관계
+    - cloud-init은 netplan 설정 파일을 자동으로 만들어주는 역할
+    - 실제 흐름
+        ```
+        cloud-init 실행
+             ↓
+        네트워크 정보 확인
+             ↓
+        netplan YAML 생성
+             ↓
+        /etc/netplan/50-cloud-init.yaml 생성
+             ↓
+        netplan 실행
+             ↓
+        IP 설정 완료
+        ```
+        - `50-cloud-init.yaml`의 의미
+            - 50: 우선순위
+            - cloud-init: 자동 생성 주체
+            - .yaml: 설정 파일
+            - Ubuntu/cloud-init에서 관례적으로
+                - 00~10: 초기 설치 / 기본 설정
+                - 50: cloud-init 자동 설정
+                - 99: 사용자가 직접 설정 (override용)
+                - 숫자가 작을 수록 먼저 적용 (우선순위 낮음)
+                    - 큰 숫자가 작은 숫자를 override (큰 숫자가 우선순위 높음)
+
 ## 10. 명령어
 
 ### sudo
