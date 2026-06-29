@@ -494,6 +494,39 @@
     - `sudo date -s "2026-07-01 10:30:00"`
         - `-s`: set, 설정
 
+### timedatectl
+- 시스템의 시간과 날짜를 관리하는 명령어
+- 리눅스의 시간 종류
+    - 시스템 시간(System Clock)
+        - 실제 사용하는 시간
+        - 파일 생성 시간
+        - 로그 시간
+        - 프로그램 실행 시간
+    - 하드웨어 시간(RTC)
+        - Real Time Clock
+        - 컴퓨터 안에 있는 작은 시계
+        - 컴퓨터를 꺼도 CMOS 배터리로 시간이 계속 유지
+        - 컴퓨터 전원 ON → 리눅스가 RTC 읽음 → 시스템 시간 생성
+    - UTC
+        - 세계 표준 시간
+        - 한국은 UTC +9
+- 기본 구조: `timedatectl [서브커맨드]`
+- 서브커맨드
+    - `status`: 상태 확인
+    - `show`: 모든 설정 출력
+    - `list-timezones`: 시간대 목록 출력
+    - `set-timezone Asia/seoul`: 시간대 변경
+    - `set-time "2026-06-29 16:00:00"`: 시스템 시간 변경
+    - `set-ntp true/false`: NTP ON/OFF
+- NTP
+    - Network Time Protocol
+    - 네트워크를 통해 컴퓨터의 시간을 정확하게 맞추기 위한 통신 규약(프로토콜)
+- NTP Server
+    - 정확한 시간을 제공하는 서버(컴퓨터)
+- NTP Service
+    - NTP 서버에 접속하고, 시간을 받아오고, 시간을 수정하는 역할을 하는 프로그램
+    - 자동 시간 동기화 프로그램
+
 ### cat
 - concatenate
 - 파일의 내용을 한 번에 모두 출력하는 명령어
