@@ -131,6 +131,17 @@
 - 이벤트 발생 시각과 로그 생성 시각이 일치해야 이벤트를 정확하게 추적 가능
     - NTP를 이용한 시간 동기화는 실제 운영 환경의 필수 요소
 
+### 이슈: Wazuh All-in-One 설치 중 Dashboard 설치 단계에서 오류 발생
+- 해결 과정
+    - Wazuh 설치 로그 확인
+        - `/var/log/wazuh-install.log` 확인
+    - No space left on device 메시지 확인
+        - 디스크 공간 부족으로 Dashboard 설치 실패
+    - 기존의 wazuh-vm 삭제 | 디스크 용량을 확장한 wazuh-vm 재생성
+        - 기존 50GB → 100GB 재생성
+- Wazuh는 로그 저장뿐 아니라 검색을 위한 Indexing 과정에서 추가 디스크 공간을 사용
+    - 이로 인한 VM 기본 디스크 용량 대비 높은 저장 요구사항으로 인해 설치 중 디스크 부족 문제가 발생할 수 있음
+
 ## 10. 관련 지식
 
 ### VM 생성
