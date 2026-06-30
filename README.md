@@ -89,10 +89,10 @@
 - [x] 문서 스켈레톤 작성
 - [x] VirtualBox 설치
 - [x] Attack VM 구축
-- [ ] Target VM 구축
-- [ ] Wazuh VM 구축
-- [ ] SSH 구성
-- [ ] Wazuh 설치
+- [x] Target VM 구축
+- [x] Wazuh VM 구축
+- [x] SSH 구성
+- [x] Wazuh 설치
 - [ ] Wazuh Agent 설치
 - [ ] SSH Login Failure 탐지
 - [ ] SSH Brute Force 탐지
