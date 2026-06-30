@@ -93,6 +93,7 @@
 - [ ] Wazuh VM 구축
 - [ ] SSH 구성
 - [ ] Wazuh 설치
+- [ ] Wazuh Agent 설치
 - [ ] SSH Login Failure 탐지
 - [ ] SSH Brute Force 탐지
 - [ ] 탐지 결과 정리
