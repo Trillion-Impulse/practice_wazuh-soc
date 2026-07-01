@@ -215,6 +215,12 @@
 - Manager
     - 로그를 분석하는 프로그램
     - ex: Failed password 라는 로그를 받으면, 규칙(Rule)과 비교해서 SSH 로그인 실패 라고 판단
+- Indexer
+    - Manager가 생성한 이벤트와 로그를 저장하고 빠르게 검색할 수 있도록 인덱싱
+    - 로그 저장: Agent에서 수집된 로그, 보안 이벤트, 알림(Alert), 취약점 스캔 결과, 파일 무결성(FIM) 정보 등
+    - 인덱싱(Indexing): 데이터를 검색하기 쉽도록 색인 생성
+    - 검색(Search): Dashboard에서 검색하는 대부분의 요청을 처리
+    - 데이터 보관: 일별 또는 월별 인덱스로 저장, 오래된 데이터 삭제(ILM 등 정책 활용), 백업 및 복구 지원
 - Dashboard
     - 웹 브라우저에서 보는 화면
     - ex: Chrome에서 `https://Wazuh-IP`로 접속하면 Alert, Events, Agent, Inventory 등을 볼 수 있음
