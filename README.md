@@ -150,6 +150,24 @@
     - 실습 환경에서 서버를 직접 구축한 것이므로 인증서 정보를 확인한 후 경고를 무시하고 접속
     - 실제 운영 환경에서는 공인 CA 또는 사내 CA 인증서를 적용하여 경고를 제거 가능
 
+### 이슈: SSH Brute Force 탐지 규칙 5763발생
+- 상황
+    - SSH Brute Force를 존재하는 유저에 대해 수행
+    - SSH Brute Force를 수행 후 예상한 rule.id.5712가 아닌 5763이 발생
+- 해결 과정
+    - Wazuh ruleset 검색
+    - ssh rules id는 5700 ~ 5764
+    - rule.id.5710: Attempt to login using a non-existent user.
+        - rule.id.5710으로부터 5712가 발생
+            - rule.id.5712: brute force trying to get access to the system. Non existent user.
+        - 존재하지 않는 유저에 대해서 발생하는 rule
+    - rule.id.5760: authentication failed.
+        - failed password 등에 대한 rule
+        - rule.id.5763:brute force trying to get access to the system. Authentication failed.
+        - 존재하는 유저에 대해 비밀번호 실패 등에 대한 rule
+- SSH Brute Force 탐지 Rule이 단일 규칙이 아닌 로그 유형 기반으로 분기됨
+- Wazuh의 기본 탐지 규칙이 xml 형식으로 정의되어 있으며, 각 rule의 속성을 통해 탐지 조건과 Alert 생성 기준을 설정
+
 ## 10. 관련 지식
 
 ### VM 생성
