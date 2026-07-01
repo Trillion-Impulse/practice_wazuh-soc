@@ -346,6 +346,112 @@
     쉘(Bash 등) 실행
     ```
 
+### Wazuh Rule
+- Rule
+    - 경고를 발생시킬 상황에 대한 규칙
+    - Wazuh에서는 XML 형식으로 작성
+        - 속성(Attribute)과 요소(Element)로 구성
+- Wazuh가 Rule을 통해 Alert를 생성하는 흐름
+    ```
+    컴퓨터
+    ↓
+    로그 생성
+    ↓
+    Wazuh 수집
+    ↓
+    Decoder
+    (로그 해석)
+    ↓
+    Rule
+    (조건 확인 후 판단)
+    ↓
+    Alert 생성
+    ↓
+    관리자 확인
+    ```
+    - Decoder
+        - 로그를 분석해서 의미 있는 정보를 추출
+        - ex
+            - 원래 로그: `Jul 1 10:00 sshd[1234]: Failed password for root from 1.2.3.4`
+            - Decoder는 아래와 같이 정보를 분리
+                - 사용자: `root`
+                - IP: `1.2.3.4`
+                - 행위: `Failed password`
+- 속성(Attribute)
+    - Rule의 기본 정보를 정의
+    - id
+        - Rule의 고유 번호
+        - Rule을 구분하는 번호
+        - Dashboard의 Rule ID와 동일
+    - level
+        - Alert의 위험도
+        - Level은 0~16까지 존재
+            | level | 의미 |
+            |-----|-----|
+            | 0 | Alert 생성 안 함 |
+            | 1~3 | 정보성 이벤트 |
+            | 4~7 | 낮은 위험 |
+            | 8~10 | 중간 위험 |
+            | 11~13 | 높은 위험 |
+            | 14~16 | 매우 높은 위험 |
+    - frequency
+        - 몇 번 발생해야 Rule을 실행할지 지정
+    - timeframe
+        - frequency 만큼의 event 발생에 대한 제한시간
+        - frequency와 함께 사용
+    - ignore
+        - 같은 alert를 일정 시간 다시 발생시키지 않음
+    - overwrite
+        - 기존 Rule을 덮어 씀
+    - noalert
+        - Rule은 실행하지만 Alert는 만들지 않음
+    - 그 밖에도 존재
+- 요소(Element)
+    - 탐지 조건과 동작을 정의
+    - description
+        - Rule 설명
+        - Dashboard에서 그대로 보임
+    - if_sid
+        - 특정 Rule이 발생했을 때만 실행
+        - ex: `<if_sid>5710</if_sid>`
+            - 의미: 5710 발생
+    - if_matched_sid
+        - 특정 Rule이 여러 번 발생하면 실행
+        - ex: `<if_matched_sid>5710</if_matched_sid>`
+            - 의미: 5710이 여러 번 발생
+    - match
+        - 로그에 특정 문자열이 있는지 검사
+        - ex: `<match>Faild password</match>`
+    - mitre
+        - Rule이 탐지한 이벤트를 MITRE ATT&CK의 표준 공격 기법과 매핑하여, 
+        공격의 성격을 쉽게 이해하고 다른 보안 솔루션과도 일관된 기준으로 분석할 수 있게 해 주는 구성요소
+        - ex
+            ```
+            <mitre>
+                <id>T1110</id>
+            </mitre>
+            ```
+            - 의미: 이 Rule이 탐지하는 행위는 MITRE ATT&CK의 T1110(Brute Force) 기법과 관련 있다.
+        - MITRE
+            - 사이버 보안 기술과 표준을 연구하는 미국의 비영리 기관
+        - MITRE ATT&CK
+            - Adversarial Tactics, Techniques, and Common Knowledge
+            - 해커들이 실제로 사용하는 공격 방법을 체계적으로 정리한 데이터베이스
+            - 보안 업계의 공통 언어 역할
+        - 보안 장비는 제조사 마다 다름
+            - 각 장비에서 경고 이름은 다를 수 있음
+            - 하지만 MITRE를 표시하면 장비의 종류와 관계없이 어떤 기법과 관련된 것인지 알 수 있음
+    - same_source_ip
+        - 같은 IP만 계산
+    - same_user
+        - 같은 사용자만 계산
+    - regex
+        - 정규표현식으로 검사
+    - group
+        - Rule을 그룹으로 분류
+        - Dashboard 검색할 때도 사용
+    - 그 밖에도 존재
+
 ## 10. 명령어
 
 ### sudo
