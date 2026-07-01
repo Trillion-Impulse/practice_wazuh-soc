@@ -95,7 +95,7 @@
 - [x] Wazuh 설치
 - [x] Wazuh Agent 설치
 - [x] SSH Login Failure 탐지
-- [ ] SSH Brute Force 탐지
+- [x] SSH Brute Force 탐지
 - [ ] 탐지 결과 정리
 
 ## 8. 탐지 결과
