@@ -198,6 +198,8 @@
         - `timedatectl`
         - Time Zone 일치
         - NTP 서버 활성화
+    > date & timedatectl
+    ![date&timedatectl](screenshots/troubleshooting/issue2.time-synchronization.png)
 - 이벤트 발생 시각과 로그 생성 시각이 일치해야 이벤트를 정확하게 추적 가능
     - NTP를 이용한 시간 동기화는 실제 운영 환경의 필수 요소
 
