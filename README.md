@@ -208,6 +208,10 @@
     - NTP를 이용한 시간 동기화는 실제 운영 환경의 필수 요소
 
 ### 이슈 3: Wazuh All-in-One 설치 중 Dashboard 설치 단계에서 오류 발생
+- 상황
+    - Wazuh All-in-One 설치 중 Dashboard 설치 단계에서 오류 발생
+    > Install-error
+    ![Install-error](screenshots/troubleshooting/issue3.wazuh-installation-error-no-space.png)
 - 해결 과정
     - Wazuh 설치 로그 확인
         - `/var/log/wazuh-install.log` 확인
