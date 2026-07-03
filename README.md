@@ -49,11 +49,7 @@
     ```
     practice_wazuh-soc
     ├── README.md
-    ├── architecture/
-    ├── screenshots/
-    ├── rules/
-    ├── logs/
-    └── report/
+    └── screenshots/
     ```
 
 ## 5. 아키텍처
