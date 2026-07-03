@@ -109,6 +109,12 @@
     - 10회 중 가장 마지막 로그
         - Jul 1 06:52:44 target-vm sshd[2547]: Failed password for targetadmin from 192.168.56.106
     - 10회 로그인 실패 이벤트 모두 Source IP(192.168.56.106)에서 발생
+
+    <details>
+      <summary>SSH Login Failure 탐지 auth.log</summary>
+      <img src="screenshots/ssh-login-failure-per1min-1-log.png">
+    </details>
+
 - Wazuh
     - 10회 중 가장 마지막 Alert
         - Jul 1, 2026 @ 15:52:45.347
