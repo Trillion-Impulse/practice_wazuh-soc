@@ -172,6 +172,10 @@
 ## 9. 트러블 슈팅
 
 ### 이슈 1: Host-Only 인터페이스에 IPv4가 자동 할당 되지 않음
+- 상황
+    - Host-Only 인터페이스에 IPv4가 자동 할당 되지 않음
+    > Network-error
+    ![Network-error](screenshots/troubleshooting/issue1.network-trouble-shooting.png)
 - 해결 과정
     - Netplan 설정 확인
         - `sudo cat /etc/netplan/*.yaml` 확인
