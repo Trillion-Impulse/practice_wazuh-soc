@@ -58,6 +58,8 @@
 
 ## 5. 아키텍처
 - 아키텍처
+    > vm-architecture
+    ![vm-architecture](screenshots/architecture/vm-architecture.png)
     ```
     ┌─────────────────────┐
     │ Attack VM           │
