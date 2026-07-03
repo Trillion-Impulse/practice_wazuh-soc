@@ -120,6 +120,8 @@
             - 5
         - rule.id
             - 5760
+    > Wazuh 스크린샷
+    ![Wazuh](screenshots/ssh-login-failure/ssh-login-failure-per1min-2-wazuh.png)
 - 이벤트 분석
     - 동일한 Source IP(attack-vm: 192.168.56.106)에서 잘못된 비밀번호를 통한 로그인 시도가 약 1분에 한번씩 총 10회 발생
     - Wazuh rule.id 5760의 탐지조건이 충족
@@ -137,6 +139,8 @@
     - 10회 중 8번째 로그
         - Jul 1 07:01:38 target-vm sshd[2595]: Failed password for targetadmin from 192.168.56.106
     - 10회 모두 동일 Source IP에서 동일 이벤트 발생
+    >auth.log 스크린샷
+    ![auth.log](screenshots/brute-force/brute-force-detection-1-log.png)
 - Wazuh
     - 10회 중 8번째 Alert
         - Jul 1, 2026 @ 16:01:39.706
@@ -146,6 +150,8 @@
             - 10
         - rule.id
             - 5763
+    >Wazuh 스크린샷
+    ![Wazuh](screenshots/brute-force/brute-force-detection-2-wazuh.png)
 - 이벤트 분석
     - 동일한 Source IP(attack-vm: 192.168.56.106)에서 잘못된 비밀번호를 통한 로그인 시도가 120초 안에 8회 이상 발생
     - Wazuh rule.id 5763의 탐지 조건을 충족
