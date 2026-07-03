@@ -100,6 +100,58 @@
 
 ## 8. 탐지 결과
 
+### SSH Login Failure 탐지
+- 공격 목적
+    - 반복적인 SSH 로그인 실패 이벤트를 발생시켜 Wazuh에서 탐지되는지 확인하기 위함
+- 공격 방법
+    - attack-vm에서 target-vm에 존재하는 계정에 잘못된 비밀번호를 약 1분에 한번씩 총 10회 시도
+- auth.log
+    - 10회 중 가장 마지막 로그
+        - Jul 1 06:52:44 target-vm sshd[2547]: Failed password for targetadmin from 192.168.56.106
+    - 10회 로그인 실패 이벤트 모두 Source IP(192.168.56.106)에서 발생
+- Wazuh
+    - 10회 중 가장 마지막 Alert
+        - Jul 1, 2026 @ 15:52:45.347
+        - rule.description
+            - sshd: authentication failed.
+        - rule.level
+            - 5
+        - rule.id
+            - 5760
+- 이벤트 분석
+    - 동일한 Source IP(attack-vm: 192.168.56.106)에서 잘못된 비밀번호를 통한 로그인 시도가 약 1분에 한번씩 총 10회 발생
+    - Wazuh rule.id 5760의 탐지조건이 충족
+        - `<if_sid>`태그 조건 5700, 5716이 충족
+        - `<match>`태그 조건 중 Failed password를 충족
+    - 해당 이벤트는 SSH 인증 관련 부모 rule(5700, 5716)에 의해 사전 분류된 후, auth.log에서 Failed password 문자열이 매칭되어 rule 5760이 트리거됨
+    - 따라서 SSH 인증 실패로 판단, Wazuh에서 sshd authentication failed Alert 발생
+
+### SSH Brute Force 탐지
+- 공격 목적
+    - 반복적인 SSH 로그인 실패 이벤트를 발생시켜 Wazuh에서 Brute Force 공격을 탐지하는지 확인하기 위함
+- 공격 방법
+    - attack-vm에서 target-vm에 존재하는 계정에 잘못된 비밀번호를 120초안에 10회 시도
+- auth.log
+    - 10회 중 8번째 로그
+        - Jul 1 07:01:38 target-vm sshd[2595]: Failed password for targetadmin from 192.168.56.106
+    - 10회 모두 동일 Source IP에서 동일 이벤트 발생
+- Wazuh
+    - 10회 중 8번째 Alert
+        - Jul 1, 2026 @ 16:01:39.706
+        - rule.description
+            - sshd: brute force trying to get access to the system. Authentication failed.
+        - rule.level
+            - 10
+        - rule.id
+            - 5763
+- 이벤트 분석
+    - 동일한 Source IP(attack-vm: 192.168.56.106)에서 잘못된 비밀번호를 통한 로그인 시도가 120초 안에 8회 이상 발생
+    - Wazuh rule.id 5763의 탐지 조건을 충족
+        - `<if_matched_sid>`태그 조건 5760 반복을 충족
+        - timeframe 120안에 frequency 8회 반복을 충족
+    - 해당 이벤트는 동일 Source IP에서 발생한 SSH 인증 실패 이벤트 5760이 지정된 조건에 맞게 반복되어 rule 5763이 트리거됨
+    - 따라서 SSH brute force로 판단, Wazuh에서 sshd brute force Alert 발생
+
 ## 9. 트러블 슈팅
 
 ### 이슈 1: Host-Only 인터페이스에 IPv4가 자동 할당 되지 않음
