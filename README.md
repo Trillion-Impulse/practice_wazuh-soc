@@ -29,9 +29,20 @@
 - Log Source: Linux auth.log
 
 ### 네트워크
-- Host-Only Network
 - NAT
-
+    > NAT
+    ![NAT](screenshots/network/network-configuration-1.png)
+- Host-Only Network
+    > Host-Only Network
+    ![Host-Only](screenshots/network/network-configuration-2.png)
+- vm 네트워크 설정
+    - 각 vm IP 확인
+        > ip configuration
+        ![ip](screenshots/network/ip-configuration-log.png)
+- 네트워크 통신 검증
+    - vm간 ping 테스트
+        > ping-test
+        ![ping-test](screenshots/network/ping-test-log.png)
 
 ## 4. 프로젝트 구조
 - 구조
