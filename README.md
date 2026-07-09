@@ -69,8 +69,8 @@
     │ auth.log            │ 
     │ Wazuh Agent         │ 
     └─────────┬───────────┘ 
-              │ 
-              │ Log Forwarding ▼ 
+              │ Log Forwarding
+              ▼ 
     ┌─────────────────────┐ 
     │ Wazuh VM            │ 
     │ Wazuh Manager       │ 
